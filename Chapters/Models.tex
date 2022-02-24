@@ -1,0 +1,105 @@
+\chapter{Model Definition}
+In this chapter we define each of the models that we use as well as some of the variations. Having a clear model is the first stage in being able to predict future behaviour. We begin by ptoviding the base model that we use to form the basis of our stockpile models. We then present some of the variations to the model that can be made. We do not investigate these changes until Chapter \ref{results}. After presenting the models for the stockpile we look at the models we use for modelling the TGA experiment.
+
+\section{Stockpile Model}
+\label{Sec:stockpile}
+The first model we examine is for the large stockpiles. To model such stockpiles we use the Frank-Kamenetskii (FK-theory). We consider the equation,
+\begin{equation}
+\rho c \frac{\partial T}{\partial t}=\nabla \cdot \left(k\nabla T\right) +Q(T), \label{base}
+\end{equation}   
+where the parameters are defined in the nomenclature, and $Q(T)$ represents heat generation inside the stockpiles. Equation \ref{base} provides the basis for which we build our models. Inside the stockpiles we have multiple reactions occurring. Longbottem et al. \cite{Ray19} conducted experimental work on the material found inside the stockpiles. Multiple reaction schemes have been proposed by Longbottom et al \cite{Ray19}. We consider a sequence of two parallel reactions,
+\begin{align*}
+3\text{Fe}+2\text{O}_2 &\rightarrow \text{Fe}_3\text{O}_4, \\
+6\text{FeO}+\text{O}_2 &\rightarrow 2\text{Fe}_3\text{O}_4. \\
+\end{align*} 
+We can model these reactions through an Arrhenius reaction rate. The reaction rate is given by,
+\begin{equation}
+k(T)=A\exp\left(\frac{-E}{RT}\right). \label{arrhenius}
+\end{equation} 
+Using the Arrhenius reaction rate, Equation \ref{arrhenius}, for two reactions, Equation \ref{base} becomes,
+\begin{equation}
+\rho c \frac{\partial T}{\partial t}=\nabla \cdot \left(k\nabla T\right) +Q_1A_1\exp\left(\frac{-E_1}{RT}\right)+Q_2A_2\exp\left(\frac{-E_2}{RT}\right). \label{FK_eq}
+\end{equation}
+The parameter $Q$ is to the heat generated from the reaction. Equation \ref{FK_eq}, is a heat balance equation that describes the rate at which energy inside the stockpile changes. This formulation is valid for any geometry.\\
+One key consideration in proposing a model is understanding the assumptions that are placed on the model. The assumptions simplify the model but we cannot make too many assumptions otherwise the information gained from the model is not useful. We have made the following assumptions:
+\begin{itemize}
+\item The filter cake is a homogeneous material.
+\item No material is consumed by the reactions.
+\item Heat is only transported via conduction.
+\item Oxygen is not depleted within the stockpile. 
+\item The change in filter cake density is negligible.
+\end{itemize}
+These assumptions are necessary to simplify the problem into something that we can investigate. The filter cake is naturally a heterogeneous material. We are unable to quantify this heterogeneity and as such cannot factor this into the model. %Another factor that makes this complicated is measuring the effects that the material has on each parameter. Because of this then we can use effective parameters that assume the material is homogeneous and these will be the parameters obtained through experimentation.
+\\
+Within the stockpiles oxygen, iron and  w\"{u}stite are all consumed as part of the reactions. In the combustion literature it is standard to assume that the material is not consumed \cite{Zhang16}. The argument is that most models are interested in preventing ignition and the material depleted before ignition is often not significant. Oxygen is often added into models after the initial investigations. We eventually remove this assumption.\\
+For outdoor stockpiles there are other mechanisms of heat transfer. Wind can transfer energy within the stockpile. Radiation is another form of energy transfer that is usually not considered. Advection is typically added into a model using simple models. These do not account for the variation in wind that occurs naturally. %cite. 
+Radiation as a form of energy transfer is not usually considered as the effects are often small at low temperatures.\\
+Through the course of this thesis we aim to remove some of these assumptions in order to develop the model to provide more realistic predictions.\\
+\subsubsection{Oxygen}
+We add a mass balance equation for oxygen into the model. One factor to consider is the consumption of oxygen by the reaction. We modify the reaction rate equation \ref{arrhenius}, to include oxygen as a factor. We assume a first order reaction for simplicity, though this may prove to be insufficient. The modified equation becomes.
+\begin{equation}
+k(T)=OA\exp\left(\frac{-E}{RT}\right). \label{Arr_Oxygen}
+\end{equation}
+This now includes oxygen as a controlling factor in the reaction rate. If the oxygen concentration is zero, then the reaction ceases. Using equation \ref{Arr_Oxygen}, the mass balance equation is,
+\begin{equation}
+\frac{\partial O}{\partial t}=D\nabla \cdot \nabla O - OA\exp\left(\frac{-E}{RT}\right). \label{O2_equation}
+\end{equation}
+This model is limited to include the diffusion of oxygen and does not include advection. Adding Equation \ref{O2_equation} into the model removes the previous assumption we made that oxygen is not depleted within the stockpile. We still make assumptions about how oxygen moves throughout the stockpile and we also have to make assumptions as to how oxygen is exchanged at the boundary. These assumptions are more realistic than oxygen not being depleted and as such this addition is made to the model.
+
+\subsubsection{Material Consumption}
+Consumption of the material within the stockpile is usually not considered in models for spontaneous combustion. In many applications of combustion theory \cite{Zhang16, NELS03,RESTUCCIA17}, the objective is to identitify the conditions for self-ignition in order to prevent a loss of material. In these cases if the material has undergone a significant depletion then the objective has failed. The result is that this assumption is acceptable in these cases. Ignoring the depletion of material is a worst case scenario approach. Any conditions that are imposed on these models to limit self-heating will apply to the stockpiles with reactant depletion.\\
+The stockpiles that we are interested in are used to recycle the filter cake. In this case it is desirable for the stockpiles to undergo self heating. It may also be useful to be able to model the stockpiles at high temperatures in order to predict where the material has sintered. In order to make the model useful at high temperatures we need to consider the consumption of reactants.\\
+To include material consumption into our model we consider the effect it has on the reaction rate. We consider a first order arrhenius reaction for simplicity. Equation \ref{Arr_Oxygen} becomes,
+\begin{equation}
+k(T)=MOA\exp\left(\frac{-E}{RT}\right), \label{Arr_Mat}
+\end{equation}
+where $M$ is the mass density of the reactant. When introducing the reactants into the model we have to make some consideration for the units. We go into detail about determining units in section \ref{SEC:TGA}.\\
+The material within the stockpile is a solid, as such we do not consider any transport within the stockpile. Similarly to when we introduced oxygen an assumption is removed, no depletion of reactant. New assumptions are made about how material is moved through the stockpile and the effect it has on the reaction. These assumptions are more reasonable than the material having no reactants consumed in the reaction.\\
+
+\subsection{Boundary Conditions}
+\label{Sec:models:BC}
+A partial differential equation (PDE) model requires boundary conditions. The boundary conditions can be adjusted in order to add more complexities into the model. The most basic boundary condition is the Dirichlet condition,
+\begin{equation}
+T=Ta. \label{base_BC}
+\end{equation}   
+It is often assumed that the ambient temperature is constant. This assumption does not have to be made and we remove this by investigating the effects of periodic boundary conditions. The Dirichlet boundary condition assumes that there is perfect heat transfer between the external boundary and the air. This can be overcome by introducing Newtonian cooling boundary conditions,
+\begin{equation}
+\frac{\partial T}{\partial n}=-h\left(T-T_a\right), \label{Newton_cooling}
+\end{equation}
+where $\frac{\partial T}{\partial n}$ is the outward unit normal derivative. Similarly to the dirichlet condition, the ambient temperature is usually considered fixed. For the newtonian cooling condition we have the limiting case, as $h\rightarrow \inf$, then the boundary condition approaches the Dirichlet condition, $T=T_a$. This condition indicates perfect heat tansfer between the boundary and ambient air.
+
+\section{Thermogravimetric Analysis Model}
+\label{SEC:TGA}
+As part of this thesis we require a model that simulates the TGA experiment. This model is used to estimate the reaction parameters used in Equation \ref{arrhenius}. The TGA experiment provides some data that can be used whereas the stockpiles alone cannot provide these estimates. We will build this model using Equation \ref{Arr_Mat}. Equation \ref{Arr_Mat} is the rate at which the reaction is occurring. By carefully selecting the appropriate units, we can express this as the rate at which a mass, $M$ is consumed by the reaction. We also want to consider our choice of units in the context of the stockpiles. We do this to ensure consistency to allow for the reaction parameters to be used easily in the stockpile models. We model the TGA experiment by the system of equations,
+\begin{align}
+\frac{dM}{dt}&=-MOA\exp\left(\frac{-E}{RT}\right), \label{TGA_system} \\
+\frac{dT}{dt}&=\alpha. \label{TGA_system2}
+\end{align}
+This system represents the mass lost through a reaction as the temperature is increased at a constant rate. To use the system of equations \ref{TGA_system}, we make the following assumptions:
+\begin{itemize}
+\item The temperature is constant throughout the sample and is increased at a fixed rate.
+\item Oxygen levels are constant for the duration of the experiment.
+\end{itemize}
+These assumptions are reasonable based on the experimental design. The constant temperature is justified due to the small size of the sample. The sample is 100 mg and the temperature diffusion within the sample is negligible. The experiment has a continuous inflow of air. We assume this inflow replaces oxygen consumed during the reaction. If we removed any assumptions then it adds more complexity into the model. We could measure the oxygen concentration at the outflow point in order to determine the validity of this assumption.\\
+We still need to determine an appropriate set of units. From dimensional analysis we have,
+\begin{equation}
+\frac{\left[M\right]}{\left[t\right]}=\left[M\right]\left[OA\right].
+\end{equation}
+Since $\left[M\right]$ appears on both sides of the equation then its units does not matter for the TGA experiment. For the TGA model we use mass for the units of $M$. We choose to use mass since it is easy to convert the equation into a mass density equation for models that consider spatial dimensions. Since we can scale $M$ by a constant then if we assume that the volume is kept constant and the mass doesn't change spatially then the equation remains true. When mass does change spatially then the change in mass density follows the mass change equation in equation \ref{TGA_system}.\\
+We now consider appropriate units for oxygen. In the context of the TGA experiment it does not matter as oxygen is kept constant. In the large stockpiles the concentration is the most natural quantity to consider. When we include consumption of iron, our reaction rate is expressed as the rate at which a mass of iron is consumed. In order to determine how much oxygen is consumed at the same time it is easiest to work in terms of a mass of oxygen rather than a concentration. We are still able to convert mass density into a concentration and this is done after the simulation is complete. The pre-exponential factor, $A$, subsequently has units, $[A]=\text{m}^3/\text{kg}/\text{s}$. We may scale this constant to have different units of time depending upon the context.\\
+In order to model the TGA experiment conducted by Longbottom et al. \cite{Ray19}, we consider a two reaction system. We only consider simulating the region that is considered from $130-600^oC$. This is where the bulk of the self heating is expected to occur in the large stockpiles. Prior to this region, moisture is being removed from the sample. There is a possibility that more reactions occurr in this region; we expect two reactions are sufficient to simulate the experiment. The TGA experiment measures the total mass of the sample. Our model equations are for the mass of the individual components being consumed. This means that we need an equation for the sample mass.
+The sample mass is given by,
+\begin{equation}
+\frac{dM_t}{dt}=w_{c,1}M_1A_1\exp\left(\frac{-E_1}{RT}\right)+w_{c,2}M_2A_2\exp\left(\frac{-E_2}{RT}\right), \label{FWC_equation}
+\end{equation}
+Where the subscripts 1,2 refers to the first and second reaction respectively, $M_1,M_2$ follow the system given by equation \ref{TGA_system}, and $w_c$ refers to the change in sample mass per $M$ consumed.\\
+This now forms a complete system that can be used to simulate the TGA experiment. In the next chapter we use the TGA experiment to estimate the parameters in our model in order to translate this into the larger stockpiles. 
+
+\subsubsection{Differential Scanning Calorimetry}
+During the TGA experiment, Differential Scanning Calorimetry (DSC) can be conducted. This provides additional data that we can use to estimate the kinetic parameters. In order to do this we need to simulate the DSC data. We can do this using the equation,
+\begin{equation}
+H=Q_1 \frac{dM_1}{dt}+Q_2 \frac{dM_2}{dt}. \label{eq:dsc}
+\end{equation}
+This equation introduces a heat of reaction parameter $Q$, for each reaction. This is the same parameter that is introduced in our stockpile. We can rewrite Equation \ref{eq:dsc} by substitung the arrhenous reaction rates. This form allows a simple calculation to be made once we have solved the system of equations.\\
+
+We have established the various models that we conduct our analysis on. We have also stated the necessary assumptions that unperpin each of the models. These assumptions all simplify the model down. We conduct anaylsis on each of these models and present different alterations to these.

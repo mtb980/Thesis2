@@ -1,0 +1,43 @@
+\chapter{Inverse Problems and Markov-Chain Monte-Carlo}
+\label{stat_appendix}
+In this appendix we will look at the theory behind the MCMC algorithms used in the thesis. To begin we briefly look at some basic probability and Inverse problem theory, before moving on to MCMC algorithms. The material from this appendix is predominantly sourced from Tarantola \cite{tarantola05} 
+\section{Inverse Problems}
+In order to look at inverse problems we first have to address the concept of a model and model parameters. Let $\mathcal{O}$ be a physical system being studied; in our case this is the TGA experiment. We then determine a minimal set of parameters that can be used to characterise the experiment. These are our model parameters. We can then have two types of modelling; forward modelling which takes inputs of activation energy and the pre-exponential factor into the model and determines the fractional weight change. We also have inverse modelling which takes the measurements obtained in the experiment and then the values of the model parameters are inferred.\\
+
+The model parameters are not always unique. We are able to use two different sets of model parameters; we can use the temperature at which the reaction rate is maximised rather than the pre-exponential factor. There are advantages of using certain parameterisation methods.  
+
+\subsection{Probability Theory}
+In this section we will look at some of the definitions and results required to understand the inverse problems. This appendix will not go into detail about these results.
+
+
+\subsection{A Priori information}
+In order to solve the inverse problem we need to place some prior information on the state of the model parameters. This can be done in a number of ways. One of the most basic ways to assign a prior is to use the homogeneous distribution over the parameter space, which in our space is just a uniform distribution. This is not an informative prior. 
+
+\subsection{Solving the Inverse Problem} 
+W
+
+
+\section{MCMC Algorithms}
+In many contexts the posterior distribution cannot be determined analytically. In these cases it can be useful to sample from the distribution and use this sample to infer information about the model parameters. Sampling from this distribution is not straight-forward and this can be done using MCMC algorithms. The basis of these methods is to take a random walk through the parameter space and accepting new points on this walk using a likelihood function. We choose to use the metropolis Hastings algorithm add citation
+\begin{algorithm}[H]
+\SetAlgoLined
+\KwResult{Write here the result }
+ Initialise $\theta$ by sampling from the prior\;
+ \While{sample_size $<$ required sample}{
+  Sample $\theta ^*~ \sim ~ Q(theta^*|\theta)$ \;
+  Set $\alpha = \frac{P(x|\theta^*)Q(Q(theta^*|\theta)P(\theta^*)}{P(x|\theta)Q(Q(theta|\theta^*)P(\theta)}$\;
+  Sample $b ~ \sim ~U(0,1)$
+  \If{$\alpha>b$}{
+   Set $\theta=\theta^*$ \;
+   Append $\theta$ to sample\;
+   }
+ }
+ \caption{Metropolis Hastings Algorithm}
+ \label{Alg:MH-App}
+\end{algorithm}
+
+The Metropolis Hastings algorithm outlined in Algorithm \ref{Alg:MH}, is a simple algorithm to sample from the posterior distribution. $Q(\theta|\theta*)$ is our proposal distribution. We can choose a symmetric distribution for our parameters ($Q(x|y)=Q(y|x)$), allowing this term being neglected from our calculation of $\alpha$. $P(x|\theta)$ is our likelihood function determining the likelihood of observing the given data $x$ for the parameters $\theta$. 
+
+
+\section{SMC} 
+SMC can be used in the cases where multiple experiments are run. we use this method to refine the posterior distribution obtained using an MCMC algorithm.

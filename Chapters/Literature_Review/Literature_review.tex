@@ -1,0 +1,109 @@
+\chapter{Theory and Literature Review}
+There are two main components to the literature review: the combustion literature, and the experimental techniques used. These two areas have an overlap when it comes to modelling. The basics of combustion theory are introduced in this chapter along with some recent developments in the area of compost modelling. The literature surrounding the sintering of steel filter cake in stockpiles is limited to the experimental work reported by Longbottom et al.\cite{Ray19}. To develop combustion models in these stockpiles, the general literature on combustion modelling needs to be reviewed. We gain insight from looking at recent developments in other applications of the theory. The techniques and developments in the compost modelling area, can be adapted to the stockpiled filter cakehat models can be developed. This allows the models to be validated, before applying them to stocckpiles. The experimental application overlaps with the theoretical modelling requiring a thorough understanding of both in order to be able to develop these models.  
+\section{Combustion Modelling Theory}
+The fundamental theory of spontaneous combustion, is known as Frank-Kamentskii theory \cite{bowes}. The theory is based around temperature diffusion with an Arrhenius reaction term. The equation is,
+\begin{equation}
+\rho c\frac{\partial T}{\partial t}=k\frac{\partial^2 T}{\partial x^2}+Q\rho A\exp\left(\frac{-E}{RT}\right). \label{Comb_model}
+\end{equation}
+It is useful to consider the steady state solution of this equation.  
+%include the scaled variables as well.
+After rescaling the variables the steady state solution solves the differential equation,
+\begin{equation}
+\frac{d^2u}{dz^2}=-\delta\exp\left(\frac{u}{1+\varepsilon u}\right). \label{FK_mod}
+\end{equation}
+Using the Frank-Kamentskii approximation $\eps=0$, an analytic solution to the equation can be derived. This equation is the 1-dimensional analogue of Semenov's condition for ignition in a self-heating system \cite{bowes}.  The existence of this solution is dependant on the value for $\delta$ with two solutions existing for $\delta<\delta_{cr}$ \cite{bowes}. A large amount of combustion modelling uses this critical condition as a means of developing an ignition criteria for the stockpiles.
+\subsection{Application to Industry}
+The model described in equation \eqref{Comb_model} has been used in a range of industries including oxidative heating, in materials such as coal and biological heating that occurs during composting \cite{bowes}. In each of these applications there are slight differences in how the theory is applied. 
+\subsubsection{Compost}
+In the composting process the method of heating cannot simply be taken as an Arrhenious reaction. Instead a second heating function is required to model the microbial heating.  Nelson et al.\cite{NELS03} proposed the following model,
+\begin{multline}
+\rho c_vV\frac{dT}{dt}=Q_bVF_b\frac{A_1\exp[-E_1/RT]}{1+A_2\exp[-E_2/RT]}B\left(1-\frac{B}{B_{max}}\right)+Q_cVA_3\exp\left[\frac{-E_3}{RT}\right]C\\-\chi S\left(T-T_a\right). \label{Bio}
+\end{multline}
+This has been used as a basis for much of the following work involving compost models. This model has been extended to a two-dimensional model with temperature diffusion \cite{sidhu06}. This latter model can be used to determine a critical ignition length for a stockpile.\\
+An extension of this model is to introduce oxygen into the spatially uniform models \cite{nels07}.
+The consumption of oxygen limits the reaction, and consequently the temperature. This base model has been extended into two dimensions with diffusion of oxygen \cite{Sidhu2007}.\\
+When extending to multiple dimensions, an airflow is also added into the equations.
+In the one dimensional case, airflow can only be considered in one direction \cite{luang09,luang10}. When in two dimensions, an equation is required to express the airflow through the stockpile. This is done as a forced flow where the airflow is independant of temperature \cite{luang10b,luang10c}. Aganetti et al. \cite{aga16} used a Darcy-Brinkman equation for flow in a porous medium. The airflow inside these stockpiles have been studied further with different flows able to be described. \cite{AGA17}\\
+The  effect of moisture on the reaction has also been added into the model \cite{ZAM11,luang18,luang11a}. When modelling the moisture content, both a liquid water concentration and a water vapour concentration are needed. The concentration of liquid water affects the reaction rate; at higher water levels, there is an increased coverage of the reaction sites. The effects of ambient humidity, on the ignition criteria has been investigated \cite{luang18u} \\
+Further additions to the model have been to consider different geometries \cite{luang11a} and also to use radiative boundary conditions \cite{luang10d,MOR09}. These developments add more complexities into the model but improves its accuracy.\\
+%\subsubsection{Coal}
+Many of the developments to these models can be adapted and applied to filter cake stockpiles. There are some key points where the two problems differentiate, one of which is the construction of the stockpiles. The stockpiles are built up gradually over time and this has to be taken into account. The compost models focus on preventing combustion, so when the stockpile is increased in size, a cautious approach would be to consider fresh compost. This will underestimate the critical combustion length. The need for a model that considers a changing domain is dependant on the consumption of reactants due to this.
+\subsection{Periodic Boundary Conditions}
+The basic model can be adapted by change the boundary condition. One such method is to have an oscillating ambient temperature. The stockpiles are exposed to diurnal and seasonal temperature variation. Shteinberg and Khudyaev \cite{shtein05} proposed an ODE model, given by,
+\begin{align}
+\frac{d\theta}{d\tau}&=a\E^\theta-\frac{1}{\delta}\left[\theta-\theta_A\sin\left(\frac{\omega\tau}{\delta}\right)\right],\\
+\frac{da}{d\tau}&=-\gamma a\E^\theta,
+\end{align}
+for the averaged temperature and reactant consumption across the domain. Gorel'skii et al. \cite{gorel10}, analysed this model. These models do not consider the diffusion of temperature, so cannot distinguish regions that have different temperatures. \\
+Novozhilov \cite{novozhilov16} proposed a model in one dimension with a single sinusoidal, oscillating boundary. Critical dependencies for the non-dimensionalised amplitude of the oscillations, were developed in terms of the other variables. The analysis was limited to the scaled equations rather than providing any direct application to any problems. Both convective heat transfer and fixed temperature boundary conditions were considered.\\
+Novozhilov \cite{novozhilov18} added reactant consumption to the model, using a first order reaction scheme. The effects of having an initial condition that differs from the ambient temperature is also added \cite{novozhilov18}. As more complexities are introduced into this model there are more parameters to investigate. The study similarly determined critical dependencies of the scaled amplitude oscillations. Providing a critical condition for this scaled oscillation amplitude, does provide some insight into the problem, however, it does not address ways to prevent or promote ignition. This parameter does not include variables such as the stockpile length which can be controlled.\\ 
+Roy \cite{roy18} proposed a two dimensional model to investigate the effects of oscillating boundary conditions. The proposed model included an oscillating boundary along one of it's edges with fixed temperatures on the other boundaries. It included convection terms, though limited this to a closed system (no air flowing in or out of the domain). As such, the model is more applicable to an experimental set-up, rather than to assess the ignition in large stockpiles where the oscillations are expected on each boundary.\\ 
+We see that there is limited work with oscillating boundary conditions. The current models proposed are limited in their dimensions and subsequently their application to large stockpiles. The models are restricted to one sinusoidal function, whereas a model including both seasonal and diurnal temperature variation may be more appropriate. It may also be useful to use include the weather data that has been recorded, as this will be more accurate than using a sinusoidal function.
+
+\section{Experimental Techniques}
+One of the facets about this research project is the availability of experimental data. This allows more complicated models to be developed, as more parameters can be determined from experimental data. An additional benefit is that the models can be tested on smaller scales, to assess the accuracy. The relevant experimental techniques need to be understood in order to be able to model what is occurring.
+%for more complicated models to be developed, as relevant data can be measured, though this requires a more thorough understanding of the experimental techniques and the relevant theory. 
+
+\subsection{Thermogravemetric Analysis}
+\label{Kis}
+Thermogravemetric analysis (TGA), measures the weight change of a sample. A small sample is heated, usually at a fixed rate, and any deviation in mass is recorded. The technique is useful for assessing reactions such as oxidation and vaporisation, which have been observed from the experimental data for the filter cake \cite{Ray19}. Reactions such as melting and crystallisation cannot be investigated as the mass of the sample does not change \cite{thermal}.\\
+In a small scale TGA a 100 mg sample is placed in a crucible that is attached to a balance. Air is fed through the base of the set-up, and the sample is heated at a fixed rate via radiative heating. As the sample undergoes reactions the weight change is measured.\\
+This set-up can be changed to include larger sample sizes, though this affects the quality of the data. With larger samples, significant temperature gradients within the sample can occur; as a result, diffusion needs to be considered and heating at a fixed rate becomes more difficult. Since the sample is larger, it can be representative of the stockpiled material. Having a bigger sample also improves the repeatability of the experiment.\\
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{figures/TGA_exp.jpg}
+\caption{The Fractional weight change curve obtained from the TGA experiment \cite{Ray19}.}
+\label{TGA_exp}
+\end{figure} 
+\subsection{Differential Scanning Calorimetry}
+The set-up of the differential scanning calorimetry (DSC) is similar to that of the TGA. The experimental procedure of heating the sample is the same and as a result the two experiments can be conducted simultaneously. The DSC however measures the heat of the reactions occurring in the sample. This is done by measuring temperature differences\cite{thermal}.\\  
+\begin{figure}
+\centering
+\includegraphics[scale=1]{figures/DSC_exp.jpg}
+\caption{The DSC curve obtained through experimentation \cite{Ray19}.}
+\label{DSC_exp}
+\end{figure} 
+\section{TGA Modelling}
+The models used for thermogravemertic analysis have been reported in studies from Flynn and Wall \cite{flynn66} and Sharp \cite{sharp69}. In these studies the proposed model was in terms of conversion, given,
+\begin{equation}
+\frac{dC}{dt}=kf(C), \label{fl}
+\end{equation}
+where k is reaction dependant. In this case the conversion, C, can be expressed as, $C=1-\left(\left(W-W_f\right)/\left(W_0-W_f\right)\right)$, where $W$ is the weight, $W_f$ is the final weight, and $W_0$ is the initial weight. This implies that the initial concentration, $C(0)=0$ The expression for $f(C)$, is dependant on the reaction order. For a reaction of order $n$,
+\begin{equation}
+f(C)=(1-C)^n.
+\end{equation}
+This has the effect that for higher concentrations the reaction is accelerated and slows once more of the reactant is consumed. The reaction rate $k$, varies with temperature per an Arrhenious expression, \\
+\begin{equation}
+k=A\exp\left(\frac{-E}{RT}\right),
+\end{equation}
+where, A is a pre-exponential rate factor, E is the activation energy and R is the ideal gas constant.\\
+It is not necessary to write the equations in terms of the conversion factor. Ozawa \cite{ozawa65}, uses the weight directly such that the equations are,
+\begin{equation}
+-\frac{dW}{dt}=A\exp\left(\frac{-E}{RT}\right) W^n. \label{oz}
+\end{equation} 
+It is straightforward to show that these equations are equivalent. This requires equation \eqref{oz}, to be rescaled by the initial weight. In the two equations, the interpretation of pre exponential factor is different. This can be seen from dimensional analysis. For equation \eqref{oz}, $\frac{dW}{dt}$ has units $MT^{-1}$, where $M$ is units of mass and $T$ is units of time. As a result $A\exp(E/RT)W^n$ must also have units $MT^{-1}$. The exponential term is dimensionless, and $W^n$ has dimension $M^n$. As a result the dimension of the pre-exponential factor is $M^{1-n}T^{-1}$. For equation \eqref{fl}, there is no mass dimension involved in the equation as we are dealing with the dimensionless conversion factor $C$. The only units involved are time and since the reaction rate $k$ must have units $T^{-1}$, the pre-exponential factor, $A$, must have dimension $T^{-1}$. The units are only the same when the equation is first order, $n=1$. In this case the reaction is invariant under scaling of $W$. It is also useful to note that different reaction order equations have different pre-exponential factors.
+The same equations have been used in other studies to evaluate the kinetic parameters A and E \cite{carrasco93,kissinger56,sbirrazzuoli97}.\\
+Kissinger \cite{kissinger56} developed a method that can be used to determine the reaction constants, $A$ and $E$. This method was to examine when the reaction rate is at its peak. The reaction rate for Equation \eqref{oz} is at it's maximum when, 
+\begin{equation}
+\frac{d}{dt}\left(\frac{dW}{dt}\right)=0.
+\end{equation}
+In the work carried out by Kissinger, it was assumed that the reaction order was one. This resulted in the equation,
+\begin{equation}
+A\exp\left(\frac{-E}{RT_m}\right)=\frac{E}{RT_m^2}\frac{dT}{dt},
+\end{equation}
+where $T_m$ is the temperature at which the maximum reaction rate occurs. By taking logarithms straight line equation can be formed, for the variables, $X=1/T_m$ and $Y=\log\left(\alpha/T_M^2\right)$ allowing a linear regression to be peformed. If we do not assume the reaction order, then an additional term, the amount of converted material, is required. From this equation the reaction order and the kinetic parameters can be estimated. \\
+%As an aside, for this reaction problem where we have two distinct reactions occurring, determining the converted fraction of material will be difficult. As a result the simplifying assumption is to take a first order reaction.
+
+\subsection{Moisture}
+We will look to add the effects of moisture into the reaction. There are two main aspects to consider in making this addition, the drying, and how the moisture affects the reactions. 
+\subsubsection{Drying}
+Different drying models have been proposed \cite{chen98}. This includes a reaction engineering approach that models evaporation as an Arrhenious expression with activation energy as the latent heat of vaporisation. Similarly condensation is modelled using a zero activation energy assumption. This form of drying was used by Luangwilai \cite{luang11} when investigating how moisture is evaporated in the compost piles.\\
+Chen \cite{chen98} proposed a different model that looks at evaporation and condensation in terms of an exchange between two surfaces. The change in concentration is proportional to the difference in concentration at the inner surface, and the surface area. Similarly we have a change occurring that is proportional to the concentration difference on the outer surface. The advantage of this approach, is that it considers the concentration of water vapour within the sample, to be distinct from the concentration of the ambient air. The issue with this model is that it introduces additional parameters. One of the new terms introduced is the surface area of the small scale particles within the sample. In the context of this material, that does not appear to be a feasible option, as determining the surface area is quite complicated. For simplicity, we therefore use the reaction engineering approach to drying.
+
+\subsubsection{Affect on the reaction}
+Characterising how the moisture affects the reaction is not a simple task. We can consider inhibition due to covering the surface available for the reaction. Luangwilai \cite{luang11} used this approach when modelling the combustion of organic material in compost heaps. It was assumed that if the concentration is above a critical concentration, then the reaction would stop. The function is normalised so that when there is no water then the reaction is maximised and the effect of moisture is set to 1. Then the function decreases to 0 as the water concentration approaches some critical concentration. \\
+More work needs to be done experimentally to characterise how the moisture levels affect the reaction. From the TGA data provided by Longbottom et al.\cite{Ray19}, it appears as though the reactions are activated at temperatures above the evaporation point of water. This may indicate that the water won't have any effect as the reactions are not significant at those low temperatures.
+
+%Note: The moisture component of the reaction is not highly developed at this stage. More research is required into these effect and more understanding of the processes are required in order do develop a more accurate model.
+
+

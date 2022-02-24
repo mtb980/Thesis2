@@ -1,0 +1,56 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+
+\renewcommand{\O}{\mathcal{O}}
+
+\newtheorem{theorem}{Theorem}
+\theoremstyle{definition}
+\newtheorem{exmp}{Example}[section]
+\newtheorem{definition}{Definition}
+
+
+\title{Existence and Uniqueness}
+\author{Matthew Berry}
+
+\begin{document}
+\maketitle
+This chapter will cover some of the existence and uniqueness results required for the non-linear class of problems we are dealing with.
+
+What is required for the existence and uniqueness.
+\begin{itemize}
+\item Some linear theory for parabolic equations regarding existence and uniqueness.
+\item Banach Fixed point theorem
+\end{itemize}
+\section{Linear Parabolic theory}
+In this section we introduce some of the theory to provide existence and uniqueness for the linear problems. This theory is necessary to provide some of the existence results for the non-linear case  
+\section{Fixed Point Methods}
+\begin{definition}
+Given a function $T:Z\rightarrow X$, then a fixed point $x\in X$ is a point such that, 
+\begin{equation}
+T(x)=x
+\end{equation} 
+\end{definition}
+This notion of a fixed point can be useful in determining solutions to equations that are of the form $x=T(x)$ as these solutions are fixed points. It is useful to provide some condition that guarantee's that not only does such a solution exist, but that it is also unique as well. The following theorem provides that.
+\begin{theorem}[Banach Fixed Point Theorem]
+Let $X$ be a banach space. Assume 
+\begin{equation}
+A:X\rightarrow X
+\end{equation}
+is a non-linear mapping, and suppose that 
+\begin{equation}
+\lvert \lvert A[u]-A[\tilde{u}]\rvert\rvert\leq \gamma\lvert\lvert u-\tilde{u}\rvert\rvert \quad \forall u,\tilde{u}\in X,
+\label{contraction}
+\end{equation}
+for some constant $\gamma < 1$. Then A has a unique fixed point.
+\end{theorem}
+\begin{definition}
+If a function A satisfies \eqref{contraction} then we say A is a strict contraction mapping.
+\end{definition}
+\end{document}

@@ -1,0 +1,73 @@
+\chapter{Supplementary Information for Inference}
+In this appendix we include some supplementary details and additional plots for the inference carried out in Chapter \ref{Ch:Infer}.
+\section{Reaction 1}
+In this section some additional details are provided in regards to the single reaction parameter inference conducted in Section \ref{Sec:1R}. We provide additional plots that may be of interest along with the distributions that are used.
+\subsection{Distributions}
+\label{App:Distributions}
+In order to conduct the Inference we have to provide some priors. We use the following Priors,
+\begin{align*}
+\log\left(A\right) ~ &\sim ~ U\left(0,30\right), \\
+\log\left(E\right) ~ &\sim ~ U\left(0,10\right), \\
+\log\left(\sigma\right) ~ &\sim ~ N\left(-1,1\right), \\
+T_m ~ &\sim ~ U\left(600,700\right). \\
+\end{align*}
+Alongside these prior distributions we need proposal distributions for each variable
+\subsection{Summary Statistics}
+\label{App:1_Summary}
+In this section we present the summary statistics for the samples
+\subsection{Chain plots}
+\label{App:1_traces}
+
+\section{Reaction 2}
+\label{App:2_traces}
+\subsection{Trace Plots}
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/bayesian/2_reactions/mass/trace_plot_A1.pdf}
+\caption{Trace plot of $\tilde{A_1}$.}
+\label{traceA1}
+\end{subfigure}%
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/bayesian/2_reactions/mass/trace_plot_A2.pdf}
+\caption{Trace plot of $\tilde{A_2}$.}
+\label{traceA2}
+\end{subfigure}
+\newline
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/bayesian/2_reactions/mass/trace_plot_E1.pdf}
+\caption{Trace plot of $\tilde{E_1}$.}
+\label{traceE1}
+\end{subfigure}%
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/bayesian/2_reactions/mass/trace_plot_E2.pdf}
+\caption{Trace plot of $\tilde{E_2}$.}
+\label{traceE2}
+\end{subfigure}
+\newline
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/bayesian/2_reactions/mass/trace_plot_Tm1.pdf}
+\caption{Trace plot of $T_{m,1}$}
+\label{traceTm1}
+\end{subfigure}%
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/bayesian/2_reactions/mass/trace_plot_Tm2.pdf}
+\caption{Trace plot of $T_{m,2}$}
+\label{HistTm2}
+\end{subfigure}%
+\newline
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/bayesian/2_reactions/mass/trace_plot_sigma.pdf}
+\caption{Trace plot of $\sigma$}
+\label{tracesigma2}
+\end{subfigure}%
+\caption{Output from the Metropolis-Hastings for an experiment with two reactions.}
+\label{fig:MH4}
+\end{figure}

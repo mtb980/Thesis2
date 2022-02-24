@@ -1,0 +1,5 @@
+\chapter{Sequential Monte Carlo Sampling}
+In the previous chapter we utilised a Metropolis-Hastings in order to sample from the posterior distribution of our parameters. These posteriors are dependant upon the observations of a single experiment. In practice these experiments are often repeated and can be carried out under different heating rates. To make use of this additional information then we could just add this to our original data and implement an MCMC algorithm for more data. This approach would be computationally costly and could present other issues arising from various modes appearing. Instead the approach that we use is through Importance Sampling (IS) and Sequential Monte Carlo (SMC).\\
+
+\section{Importance Sampling}
+Importance sampling is a resampling technique, where given a sample $\textbf{X}$, then for each point $\textbf{x}$ in our sample a weight $w$ is calculated. These weights are calculated through the liklihood function with respect to the second reaction  
